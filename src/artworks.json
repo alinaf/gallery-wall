@@ -1,0 +1,20 @@
+[
+  {
+    "id": "afklint-1",
+    "artist": "Hilma af Klint",
+    "title": "The Ten Largest, No. 5, Adulthood",
+    "year": 1907,
+    "image": "/images/afklint-1.jpg",
+    "width": 240,
+    "height": 328
+  },
+    {
+    "id": "afklint-2",
+    "artist": "Hilma af Klint",
+    "title": "Primordial Chaos, No. 16",
+    "year": 1906,
+    "image": "/images/afklint-2.jpg",
+    "width": 37,
+    "height": 53
+  }
+]
