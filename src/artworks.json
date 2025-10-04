@@ -1,20 +1,38 @@
 [
-  {
-    "id": "afklint-1",
-    "artist": "Hilma af Klint",
-    "title": "The Ten Largest, No. 5, Adulthood",
-    "year": 1907,
-    "image": "/images/afklint-1.jpg",
-    "width": 240,
-    "height": 328
-  },
     {
     "id": "afklint-2",
     "artist": "Hilma af Klint",
+    "artistLink": "https://en.wikipedia.org/wiki/Hilma_af_Klint",
     "title": "Primordial Chaos, No. 16",
+    "titleLink": "https://www.guggenheim.org/audio/track/group-i-primordial-chaos-1906-07-by-hilma-af-klint",
     "year": 1906,
     "image": "/images/afklint-2.jpg",
     "width": 37,
-    "height": 53
+    "height": 53,
+    "didYouKnow": "In her will, af Klint requested that her work be kept secret for [20 years](https://www.moma.org/interactives/moma_through_time/1980/af-klint/) after her death."
+  },
+      {
+    "id": "cassatt-1",
+    "artist": "Mary Cassatt",
+    "artistLink": "https://en.wikipedia.org/wiki/Mary_Cassatt",
+    "title": "Woman with a Sunflower",
+    "titleLink": "https://en.wikipedia.org/wiki/Mary_Cassatt",
+    "year": 1905,
+    "image": "/images/cassatt-1.jpg",
+    "width": 74,
+    "height": 92,
+    "didYouKnow": "The sunflower was a symbol of the [Suffrage movement](https://en.wikipedia.org/wiki/Women%27s_suffrage), and Cassatt sold this painting, among many others, to raise money for the cause."
+
+  },
+        {
+    "id": "matisse-1",
+    "artist": "Henri Matisse",
+    "artistLink": "https://en.wikipedia.org/wiki/Henri_Matisse",
+    "title": "Open Window, Collioure",
+    "titleLink": "https://en.wikipedia.org/wiki/The_Open_Window_(Matisse)",
+    "year": 1905,
+    "image": "/images/matisse-1.jpg",
+    "width": 46,
+    "height": 55
   }
 ]

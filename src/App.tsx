@@ -5,11 +5,14 @@ import artworks from './artworks.json'
 interface Artwork {
   id: string
   artist: string
+  artistLink?: string
   title: string
+  titleLink?: string
   year: number
   image: string
   width: number
   height: number
+  didYouKnow?: string
 }
 
 interface PlacedArtwork extends Artwork {
@@ -19,6 +22,7 @@ interface PlacedArtwork extends Artwork {
   washiRotation?: boolean // If true, use top-right/bottom-left. If false, use top-left/bottom-right
   washiColor?: string // Color sampled from the image
   woodTexture?: number // 1, 2, or 3 for wood texture
+  ornateVariation?: number // 1, 2, or 3 for ornate frame variation
 }
 
 function App() {
@@ -68,21 +72,43 @@ function App() {
         const g = imageData[1]
         const b = imageData[2]
 
-        // Calculate luminance
-        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+        // Find the dominant color channel
+        const max = Math.max(r, g, b)
+        const min = Math.min(r, g, b)
+        const saturation = max === 0 ? 0 : (max - min) / max
 
-        // If dark, lighten; if light, darken
+        // Always ensure bright, saturated colors for washi tape
         let newR, newG, newB
-        if (luminance < 0.5) {
-          // Lighten and saturate
-          newR = Math.min(255, r + 150)
-          newG = Math.min(255, g + 100)
-          newB = Math.min(255, b + 120)
+
+        // If the color is too unsaturated (gray), pick a random vibrant color
+        if (saturation < 0.3) {
+          const colors = [
+            [255, 182, 193], // pink
+            [255, 200, 150], // peach
+            [200, 230, 255], // light blue
+            [255, 255, 180], // light yellow
+            [220, 200, 255], // lavender
+            [255, 220, 180]  // light orange
+          ]
+          const randomColor = colors[Math.floor(Math.random() * colors.length)]
+          newR = randomColor[0]
+          newG = randomColor[1]
+          newB = randomColor[2]
         } else {
-          // Darken and saturate
-          newR = Math.max(0, r - 80)
-          newG = Math.max(0, g - 80)
-          newB = Math.max(0, b - 80)
+          // Lighten and saturate based on dominant color
+          if (r >= g && r >= b) {
+            newR = Math.min(255, r + 100)
+            newG = Math.min(255, g + 50)
+            newB = Math.min(255, b + 50)
+          } else if (g >= r && g >= b) {
+            newR = Math.min(255, r + 50)
+            newG = Math.min(255, g + 100)
+            newB = Math.min(255, b + 50)
+          } else {
+            newR = Math.min(255, r + 50)
+            newG = Math.min(255, g + 50)
+            newB = Math.min(255, b + 100)
+          }
         }
 
         resolve(`rgba(${newR}, ${newG}, ${newB}, 0.8)`)
@@ -146,9 +172,10 @@ function App() {
       if (!isPlacedInGallery && !isPlacedInBedroom) {
         const washiColor = await getImageColor(draggedArtwork.image)
         const woodTexture = Math.floor(Math.random() * 3) + 1
+        const ornateVariation = Math.floor(Math.random() * 3) + 1
         setPlacedArtworks([
           ...placedArtworks,
-          { ...draggedArtwork, x, y, washiRotation: Math.random() > 0.5, washiColor, woodTexture }
+          { ...draggedArtwork, x, y, washiRotation: Math.random() > 0.5, washiColor, woodTexture, ornateVariation }
         ])
       }
       setDraggedArtwork(null)
@@ -157,6 +184,35 @@ function App() {
 
   const removeArtwork = (id: string) => {
     setPlacedArtworks(placedArtworks.filter(a => a.id !== id))
+  }
+
+  const parseLinksInText = (text: string) => {
+    // Parse markdown-style links [text](url)
+    const parts = []
+    let lastIndex = 0
+    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g
+    let match
+
+    while ((match = linkRegex.exec(text)) !== null) {
+      // Add text before the link
+      if (match.index > lastIndex) {
+        parts.push(text.substring(lastIndex, match.index))
+      }
+      // Add the link
+      parts.push(
+        <a key={match.index} href={match[2]} target="_blank" rel="noopener noreferrer">
+          {match[1]}
+        </a>
+      )
+      lastIndex = match.index + match[0].length
+    }
+
+    // Add remaining text after the last link
+    if (lastIndex < text.length) {
+      parts.push(text.substring(lastIndex))
+    }
+
+    return parts.length > 0 ? parts : text
   }
 
   return (
@@ -179,23 +235,45 @@ function App() {
                     if (!isPlaced) {
                       const washiColor = await getImageColor(artwork.image)
                       const woodTexture = Math.floor(Math.random() * 3) + 1
+                      const ornateVariation = Math.floor(Math.random() * 3) + 1
                       setPlacedArtworks([
                         ...placedArtworks,
-                        { ...artwork, x: 100, y: 100, washiRotation: Math.random() > 0.5, washiColor, woodTexture }
+                        { ...artwork, x: 100, y: 100, washiRotation: Math.random() > 0.5, washiColor, woodTexture, ornateVariation }
                       ])
                     }
                   }}
                 >
                   <img src={artwork.image} alt={artwork.title} />
                   <div className="artwork-info">
-                    <strong>{artwork.artist}</strong>
-                    <span>{artwork.title}</span>
+                    {artwork.artistLink ? (
+                      <strong><a href={artwork.artistLink} target="_blank" rel="noopener noreferrer">{artwork.artist}</a></strong>
+                    ) : (
+                      <strong>{artwork.artist}</strong>
+                    )}
+                    {artwork.titleLink ? (
+                      <span><a href={artwork.titleLink} target="_blank" rel="noopener noreferrer">{artwork.title}</a></span>
+                    ) : (
+                      <span>{artwork.title}</span>
+                    )}
+                    <span className="artwork-year">{artwork.year}</span>
                   </div>
+                  {artwork.didYouKnow && (
+                    <details className="artwork-details">
+                      <summary>did you know...</summary>
+                      <div className="artwork-extra-info">
+                        <p>{parseLinksInText(artwork.didYouKnow)}</p>
+                      </div>
+                    </details>
+                  )}
                 </div>
                 {placedArtwork && (
                   <div className="frame-circles">
                     <button
                       className={`frame-circle ${!placedArtwork.frame || placedArtwork.frame === 'none' ? 'active' : ''}`}
+                      disabled={
+                        (currentRoom === 'gallery' && !isPlacedInGallery) ||
+                        (currentRoom === 'bedroom' && !isPlacedInBedroom)
+                      }
                       onClick={() => {
                         if (currentRoom === 'gallery') {
                           setGalleryArtworks(galleryArtworks.map(a =>
@@ -211,6 +289,10 @@ function App() {
                     />
                     <button
                       className={`frame-circle frame-circle-plain ${placedArtwork.frame === 'plain' ? 'active' : ''}`}
+                      disabled={
+                        (currentRoom === 'gallery' && !isPlacedInGallery) ||
+                        (currentRoom === 'bedroom' && !isPlacedInBedroom)
+                      }
                       onClick={() => {
                         if (currentRoom === 'gallery') {
                           setGalleryArtworks(galleryArtworks.map(a =>
@@ -226,6 +308,10 @@ function App() {
                     />
                     <button
                       className={`frame-circle frame-circle-ornate ${placedArtwork.frame === 'ornate' ? 'active' : ''}`}
+                      disabled={
+                        (currentRoom === 'gallery' && !isPlacedInGallery) ||
+                        (currentRoom === 'bedroom' && !isPlacedInBedroom)
+                      }
                       onClick={() => {
                         if (currentRoom === 'gallery') {
                           setGalleryArtworks(galleryArtworks.map(a =>
@@ -242,6 +328,7 @@ function App() {
                     {currentRoom === 'bedroom' && (
                       <button
                         className={`frame-circle frame-circle-washi ${placedArtwork.frame === 'washi' ? 'active' : ''}`}
+                        disabled={!isPlacedInBedroom}
                         onClick={() => {
                           setBedroomArtworks(bedroomArtworks.map(a =>
                             a.id === artwork.id ? { ...a, frame: 'washi' } : a
@@ -274,17 +361,17 @@ function App() {
           </button>
           <h1>{currentRoom}</h1>
         </div>
-        <div className="wall">
+        <div className={`wall ${currentRoom}-wall`}>
           {placedArtworks.map((artwork) => (
             <div
               key={artwork.id}
-              className={`placed-artwork ${draggingId === artwork.id ? 'dragging' : ''} ${artwork.frame ? 'frame-' + artwork.frame : ''} ${Math.max(artwork.width, artwork.height) < 150 ? 'small-artwork' : ''} ${artwork.washiRotation ? 'washi-rotated' : ''} ${artwork.woodTexture ? 'wood-' + artwork.woodTexture : ''}`}
+              className={`placed-artwork ${draggingId === artwork.id ? 'dragging' : ''} ${artwork.frame ? 'frame-' + artwork.frame : ''} ${Math.max(artwork.width, artwork.height) < 150 ? 'small-artwork' : ''} ${artwork.washiRotation ? 'washi-rotated' : ''} ${artwork.woodTexture ? 'wood-' + artwork.woodTexture : ''} ${artwork.ornateVariation ? 'ornate-' + artwork.ornateVariation : ''}`}
               onMouseDown={(e) => handleMouseDown(e, artwork)}
               style={{
                 left: artwork.x,
                 top: artwork.y,
-                width: artwork.width,
-                height: artwork.height,
+                width: artwork.width * 4,
+                height: artwork.height * 4,
                 ...(artwork.washiColor && {
                   '--washi-color': artwork.washiColor
                 } as React.CSSProperties)
