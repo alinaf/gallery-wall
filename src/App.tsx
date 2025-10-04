@@ -349,25 +349,18 @@ function App() {
                       }}
                       title="Plain"
                     />
-                    <button
-                      className={`frame-circle frame-circle-ornate ${placedArtwork.frame === 'ornate' ? 'active' : ''}`}
-                      disabled={
-                        (currentRoom === 'gallery' && !isPlacedInGallery) ||
-                        (currentRoom === 'bedroom' && !isPlacedInBedroom)
-                      }
-                      onClick={() => {
-                        if (currentRoom === 'gallery') {
+                    {currentRoom === 'gallery' && (
+                      <button
+                        className={`frame-circle frame-circle-ornate ${placedArtwork.frame === 'ornate' ? 'active' : ''}`}
+                        disabled={!isPlacedInGallery}
+                        onClick={() => {
                           setGalleryArtworks(galleryArtworks.map(a =>
                             a.id === artwork.id ? { ...a, frame: 'ornate' } : a
                           ))
-                        } else {
-                          setBedroomArtworks(bedroomArtworks.map(a =>
-                            a.id === artwork.id ? { ...a, frame: 'ornate' } : a
-                          ))
-                        }
-                      }}
-                      title="Ornate"
-                    />
+                        }}
+                        title="Ornate"
+                      />
+                    )}
                     {currentRoom === 'bedroom' && (
                       <button
                         className={`frame-circle frame-circle-washi ${placedArtwork.frame === 'washi' ? 'active' : ''}`}

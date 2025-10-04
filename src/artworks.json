@@ -32,7 +32,8 @@
     "year": 1905,
     "image": "/images/matisse-1.jpg",
     "width": 46,
-    "height": 55
+    "height": 55,
+    "didYouKnow": "Matisse was a leader of the [Fauvist](https://en.wikipedia.org/wiki/Fauvism) movement, which featured bold, unnaturalistic color and unapologetic brushstrokes. \"Les fauves\" translates to \"the wild beasts\" in French."
   },
           {
     "id": "tanner-1",
