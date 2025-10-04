@@ -148,7 +148,6 @@ function App() {
       const artwork = placedArtworks.find(a => a.id === draggingId)
       if (artwork) {
         const artworkHeight = artwork.height * 4
-        const artworkBottom = y + artworkHeight
 
         if (currentRoom === 'gallery') {
           // Gallery: bench is 160px at bottom
