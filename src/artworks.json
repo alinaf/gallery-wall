@@ -44,9 +44,10 @@
     "year": 1919,
     "image": "/images/tanner-1.jpg",
     "width": 97,
-    "height": 100
+    "height": 100,
+    "didYouKnow": "Tanner moved from [Pennsylvania](https://en.wikipedia.org/wiki/Pennsylvania) to [Paris](https://en.wikipedia.org/wiki/Paris) in 1891, hoping to avoid the racism he faced as an [African-American artist](https://en.wikipedia.org/wiki/List_of_African-American_visual_artists). His work was hugely successful in France, and he was knighted to the [Legion of Honor](https://en.wikipedia.org/wiki/Legion_of_Honor). Tanner lived in Paris for the rest of his life, but supported civil rights organizations like the [NAACP](https://en.wikipedia.org/wiki/NAACP) from abroad."
   },
-          {
+  {
     "id": "kahlo-1",
     "artist": "Frida Kahlo",
     "artistLink": "https://en.wikipedia.org/wiki/Frida_Kahlo",

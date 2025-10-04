@@ -176,6 +176,28 @@
   font-weight: normal;
 }
 
+.dark-mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: transform 0.2s;
+  position: absolute;
+  right: 20px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1);
+}
+
+.dark-mode-toggle:focus {
+  outline: none;
+}
+
 .wall {
   position: relative;
   min-height: calc(100vh - 60px);
@@ -186,15 +208,32 @@
   background-attachment: scroll;
 }
 
-.wall.gallery-wall {
+.wall.gallery-wall::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
   background-image: url('/images/bench.png');
   background-size: auto 160px;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  pointer-events: none;
 }
 
-.wall.bedroom-wall {
+.wall.bedroom-wall::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
   background-image: url('/images/bedroom.png');
   background-size: auto 400px;
   background-position: center bottom;
+  background-repeat: no-repeat;
+  pointer-events: none;
 }
 
 .placed-artwork {
@@ -486,4 +525,80 @@
   right: auto;
   left: -6px;
   transform: rotate(45deg);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background: #1a1a1a;
+}
+
+body.dark-mode .menu {
+  background: #2a2a2a;
+  border-left-color: #444;
+}
+
+body.dark-mode .menu h2 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .artwork-item {
+  background: #333;
+  border-color: #555;
+}
+
+body.dark-mode .artwork-info {
+  color: #e0e0e0;
+}
+
+body.dark-mode .artwork-info strong {
+  color: #e0e0e0;
+}
+
+body.dark-mode .artwork-info span {
+  color: #aaa;
+}
+
+body.dark-mode .artwork-year {
+  color: #888;
+}
+
+body.dark-mode .artwork-details summary {
+  color: #e0e0e0;
+}
+
+body.dark-mode .artwork-extra-info {
+  background: #2a2a2a;
+  border-color: #555;
+  color: #aaa;
+}
+
+body.dark-mode .gallery {
+  background: #1a1a1a;
+}
+
+body.dark-mode .room-header {
+  background: #2a2a2a;
+  border-bottom-color: #444;
+}
+
+body.dark-mode .room-header h1 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .room-nav {
+  background: #e0e0e0;
+  color: #1a1a1a;
+}
+
+body.dark-mode .room-nav:hover {
+  background: #ccc;
+}
+
+body.dark-mode .wall {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode .wall.gallery-wall::before,
+body.dark-mode .wall.bedroom-wall::before {
+  filter: brightness(0) invert(1);
 }

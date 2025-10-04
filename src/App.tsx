@@ -27,6 +27,10 @@ interface PlacedArtwork extends Artwork {
 
 function App() {
   const [currentRoom, setCurrentRoom] = useState<'gallery' | 'bedroom'>('gallery')
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem('darkMode')
+    return saved ? JSON.parse(saved) : false
+  })
   const [galleryArtworks, setGalleryArtworks] = useState<PlacedArtwork[]>(() => {
     const saved = localStorage.getItem('galleryArtworks')
     return saved ? JSON.parse(saved) : []
@@ -49,6 +53,15 @@ function App() {
   useEffect(() => {
     localStorage.setItem('bedroomArtworks', JSON.stringify(bedroomArtworks))
   }, [bedroomArtworks])
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode))
+    if (darkMode) {
+      document.body.classList.add('dark-mode')
+    } else {
+      document.body.classList.remove('dark-mode')
+    }
+  }, [darkMode])
 
   const getImagePath = (path: string) => {
     return import.meta.env.BASE_URL + path.replace(/^\//, '')
@@ -399,6 +412,13 @@ function App() {
             {currentRoom === 'gallery' ? '→ bedroom' : '← gallery'}
           </button>
           <h1>{currentRoom}</h1>
+          <button
+            className="dark-mode-toggle"
+            onClick={() => setDarkMode(!darkMode)}
+            title={darkMode ? 'Light mode' : 'Dark mode'}
+          >
+            {darkMode ? '☀️' : '🌙'}
+          </button>
         </div>
         <div className={`wall ${currentRoom}-wall`}>
           {placedArtworks.map((artwork) => (
