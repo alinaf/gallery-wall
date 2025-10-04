@@ -11,6 +11,49 @@ button:focus {
   outline: none;
 }
 
+.mobile-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fef5e7;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.mobile-message h1 {
+  font-size: 4rem;
+  margin: 0 0 20px 0;
+}
+
+.mobile-message h2 {
+  font-size: 2rem;
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.mobile-message p {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 400px;
+}
+
+@media (max-width: 900px) {
+  .mobile-message {
+    display: flex;
+  }
+
+  .app {
+    display: none;
+  }
+}
+
 .app {
   display: flex;
   height: 100vh;

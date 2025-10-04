@@ -263,7 +263,13 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <>
+      <div className="mobile-message">
+        <h1>🖼️</h1>
+        <h2>gallery wall</h2>
+        <p>sorry, this only works on desktop!</p>
+      </div>
+      <div className="app">
       <aside className="menu">
         <h2>collection</h2>
         <div className="artwork-list">
@@ -449,6 +455,7 @@ function App() {
         </div>
       </main>
     </div>
+    </>
   )
 }
 
