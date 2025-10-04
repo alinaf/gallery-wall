@@ -84,30 +84,30 @@ function App() {
         if (saturation < 0.3) {
           const colors = [
             [255, 182, 193], // pink
-            [255, 200, 150], // peach
-            [200, 230, 255], // light blue
-            [255, 255, 180], // light yellow
-            [220, 200, 255], // lavender
-            [255, 220, 180]  // light orange
+            [255, 180, 120], // peach
+            [180, 220, 255], // light blue
+            [255, 240, 120], // light yellow
+            [220, 180, 255], // lavender
+            [255, 200, 140]  // light orange
           ]
           const randomColor = colors[Math.floor(Math.random() * colors.length)]
           newR = randomColor[0]
           newG = randomColor[1]
           newB = randomColor[2]
         } else {
-          // Lighten and saturate based on dominant color
+          // Lighten and saturate based on dominant color, but ensure minimum brightness
           if (r >= g && r >= b) {
-            newR = Math.min(255, r + 100)
-            newG = Math.min(255, g + 50)
-            newB = Math.min(255, b + 50)
+            newR = Math.max(200, Math.min(255, r + 100))
+            newG = Math.max(140, Math.min(255, g + 80))
+            newB = Math.max(140, Math.min(255, b + 80))
           } else if (g >= r && g >= b) {
-            newR = Math.min(255, r + 50)
-            newG = Math.min(255, g + 100)
-            newB = Math.min(255, b + 50)
+            newR = Math.max(140, Math.min(255, r + 80))
+            newG = Math.max(200, Math.min(255, g + 100))
+            newB = Math.max(140, Math.min(255, b + 80))
           } else {
-            newR = Math.min(255, r + 50)
-            newG = Math.min(255, g + 50)
-            newB = Math.min(255, b + 100)
+            newR = Math.max(140, Math.min(255, r + 80))
+            newG = Math.max(140, Math.min(255, g + 80))
+            newB = Math.max(200, Math.min(255, b + 100))
           }
         }
 
@@ -136,12 +136,30 @@ function App() {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (draggingId) {
+      const galleryRect = e.currentTarget.getBoundingClientRect()
       let x = e.clientX - dragOffset.x
-      let y = e.clientY - dragOffset.y
+      let y = e.clientY - dragOffset.y - galleryRect.top
 
-      // Constrain to stay below header (approximately 60px)
+      // Constrain to stay below header
       y = Math.max(0, y)
       x = Math.max(0, x)
+
+      // Prevent overlapping with backgrounds
+      const artwork = placedArtworks.find(a => a.id === draggingId)
+      if (artwork) {
+        const artworkHeight = artwork.height * 4
+        const artworkBottom = y + artworkHeight
+
+        if (currentRoom === 'gallery') {
+          // Gallery: bench is 160px at bottom
+          const maxY = window.innerHeight - 60 - 160 - artworkHeight
+          y = Math.min(y, maxY)
+        } else {
+          // Bedroom: bedroom image is 400px at bottom
+          const maxY = window.innerHeight - 60 - 400 - artworkHeight
+          y = Math.min(y, maxY)
+        }
+      }
 
       setPlacedArtworks(placedArtworks.map(a =>
         a.id === draggingId ? { ...a, x, y } : a
@@ -162,8 +180,21 @@ function App() {
 
     if (draggedArtwork) {
       const galleryRect = e.currentTarget.getBoundingClientRect()
-      const x = e.clientX - galleryRect.left - dragOffset.x
-      const y = e.clientY - galleryRect.top - dragOffset.y
+      let x = e.clientX - galleryRect.left - dragOffset.x
+      let y = e.clientY - galleryRect.top - dragOffset.y
+
+      // Prevent overlapping with backgrounds
+      const artworkHeight = draggedArtwork.height * 4
+      if (currentRoom === 'gallery') {
+        // Gallery: bench is 160px at bottom
+        const maxY = window.innerHeight - 60 - 160 - artworkHeight
+        y = Math.min(Math.max(0, y), maxY)
+      } else {
+        // Bedroom: bedroom image is 400px at bottom
+        const maxY = window.innerHeight - 60 - 400 - artworkHeight
+        y = Math.min(Math.max(0, y), maxY)
+      }
+      x = Math.max(0, x)
 
       // Check if artwork is already placed in any room
       const isPlacedInGallery = galleryArtworks.find(a => a.id === draggedArtwork.id)
@@ -236,9 +267,21 @@ function App() {
                       const washiColor = await getImageColor(artwork.image)
                       const woodTexture = Math.floor(Math.random() * 3) + 1
                       const ornateVariation = Math.floor(Math.random() * 3) + 1
+
+                      // Calculate safe position that doesn't overlap background
+                      let y = 100
+                      const artworkHeight = artwork.height * 4
+                      if (currentRoom === 'gallery') {
+                        const maxY = window.innerHeight - 60 - 160 - artworkHeight
+                        y = Math.min(100, Math.max(0, maxY))
+                      } else {
+                        const maxY = window.innerHeight - 60 - 400 - artworkHeight
+                        y = Math.min(100, Math.max(0, maxY))
+                      }
+
                       setPlacedArtworks([
                         ...placedArtworks,
-                        { ...artwork, x: 100, y: 100, washiRotation: Math.random() > 0.5, washiColor, woodTexture, ornateVariation }
+                        { ...artwork, x: 100, y, washiRotation: Math.random() > 0.5, washiColor, woodTexture, ornateVariation }
                       ])
                     }
                   }}
@@ -365,7 +408,7 @@ function App() {
           {placedArtworks.map((artwork) => (
             <div
               key={artwork.id}
-              className={`placed-artwork ${draggingId === artwork.id ? 'dragging' : ''} ${artwork.frame ? 'frame-' + artwork.frame : ''} ${Math.max(artwork.width, artwork.height) < 150 ? 'small-artwork' : ''} ${artwork.washiRotation ? 'washi-rotated' : ''} ${artwork.woodTexture ? 'wood-' + artwork.woodTexture : ''} ${artwork.ornateVariation ? 'ornate-' + artwork.ornateVariation : ''}`}
+              className={`placed-artwork ${draggingId === artwork.id ? 'dragging' : ''} ${artwork.frame ? 'frame-' + artwork.frame : ''} ${Math.max(artwork.width, artwork.height) < 90 ? 'small-artwork' : ''} ${artwork.washiRotation ? 'washi-rotated' : ''} ${artwork.woodTexture ? 'wood-' + artwork.woodTexture : ''} ${artwork.ornateVariation ? 'ornate-' + artwork.ornateVariation : ''}`}
               onMouseDown={(e) => handleMouseDown(e, artwork)}
               style={{
                 left: artwork.x,

@@ -22,7 +22,6 @@
     "width": 74,
     "height": 92,
     "didYouKnow": "The sunflower was a symbol of the [Suffrage movement](https://en.wikipedia.org/wiki/Women%27s_suffrage), and Cassatt sold this painting, among many others, to raise money for the cause."
-
   },
         {
     "id": "matisse-1",
@@ -34,5 +33,40 @@
     "image": "/images/matisse-1.jpg",
     "width": 46,
     "height": 55
+  },
+          {
+    "id": "tanner-1",
+    "artist": "Henry Ossawa Tanner",
+    "artistLink": "https://en.wikipedia.org/wiki/Henry_Ossawa_Tanner",
+    "title": "The Arch",
+    "titleLink": "https://www.brooklynmuseum.org/objects/397",
+    "year": 1919,
+    "image": "/images/tanner-1.jpg",
+    "width": 97,
+    "height": 100
+  },
+          {
+    "id": "kahlo-1",
+    "artist": "Frida Kahlo",
+    "artistLink": "https://en.wikipedia.org/wiki/Frida_Kahlo",
+    "title": "The Two Fridas",
+    "titleLink": "https://en.wikipedia.org/wiki/The_Two_Fridas",
+    "year": 1939,
+    "image": "/images/kahlo-1.jpg",
+    "width": 68,
+    "height": 68,
+    "didYouKnow": "This double self-portrait was painted the year Kahlo and painter [Diego Rivera](https://en.wikipedia.org/wiki/Diego_Rivera) divorced. The Frida on the right holds a tiny portrait of Rivera, that's fed by one of her veins. "
+  },
+            {
+    "id": "bridges-1",
+    "artist": "Fidelia Bridges",
+    "artistLink": "https://en.wikipedia.org/wiki/Fidelia_Bridges",
+    "title": "Garden View, Brooklyn",
+    "titleLink": "https://www.metmuseum.org/art/collection/search/853646",
+    "year": 1939,
+    "image": "/images/bridges-1.jpg",
+    "width": 13,
+    "height": 20,
+    "didYouKnow": "Bridges was a [pioneer](https://www.nytimes.com/2024/12/12/arts/fidelia-bridges-overlooked.html) in both watercolor painting and animal rights activism. She combined these passions by illustrating books about birds."
   }
 ]
