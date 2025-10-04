@@ -16,7 +16,9 @@ interface PlacedArtwork extends Artwork {
   x: number
   y: number
   frame?: 'none' | 'plain' | 'ornate' | 'washi'
-  washiCorners?: [number, number] // Random corners for washi tape: 0=top-left, 1=top-right, 2=bottom-left, 3=bottom-right
+  washiRotation?: boolean // If true, use top-right/bottom-left. If false, use top-left/bottom-right
+  washiColor?: string // Color sampled from the image
+  woodTexture?: number // 1, 2, or 3 for wood texture
 }
 
 function App() {
@@ -44,6 +46,54 @@ function App() {
     localStorage.setItem('bedroomArtworks', JSON.stringify(bedroomArtworks))
   }, [bedroomArtworks])
 
+  const getImageColor = (imageSrc: string): Promise<string> => {
+    return new Promise((resolve) => {
+      const img = new Image()
+      img.crossOrigin = 'anonymous'
+      img.onload = () => {
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+        if (!ctx) {
+          resolve('rgba(255, 182, 193, 0.8)')
+          return
+        }
+
+        canvas.width = img.width
+        canvas.height = img.height
+        ctx.drawImage(img, 0, 0)
+
+        // Sample from corner
+        const imageData = ctx.getImageData(10, 10, 1, 1).data
+        const r = imageData[0]
+        const g = imageData[1]
+        const b = imageData[2]
+
+        // Calculate luminance
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+
+        // If dark, lighten; if light, darken
+        let newR, newG, newB
+        if (luminance < 0.5) {
+          // Lighten and saturate
+          newR = Math.min(255, r + 150)
+          newG = Math.min(255, g + 100)
+          newB = Math.min(255, b + 120)
+        } else {
+          // Darken and saturate
+          newR = Math.max(0, r - 80)
+          newG = Math.max(0, g - 80)
+          newB = Math.max(0, b - 80)
+        }
+
+        resolve(`rgba(${newR}, ${newG}, ${newB}, 0.8)`)
+      }
+      img.onerror = () => {
+        resolve('rgba(255, 182, 193, 0.8)')
+      }
+      img.src = imageSrc
+    })
+  }
+
   const handleDragStart = (artwork: Artwork) => {
     setDraggedArtwork(artwork)
     setDragOffset({ x: 50, y: 50 })
@@ -60,8 +110,12 @@ function App() {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (draggingId) {
-      const x = e.clientX - dragOffset.x
-      const y = e.clientY - dragOffset.y
+      let x = e.clientX - dragOffset.x
+      let y = e.clientY - dragOffset.y
+
+      // Constrain to stay below header (approximately 60px)
+      y = Math.max(0, y)
+      x = Math.max(0, x)
 
       setPlacedArtworks(placedArtworks.map(a =>
         a.id === draggingId ? { ...a, x, y } : a
@@ -77,7 +131,7 @@ function App() {
     e.preventDefault()
   }
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault()
 
     if (draggedArtwork) {
@@ -90,11 +144,11 @@ function App() {
       const isPlacedInBedroom = bedroomArtworks.find(a => a.id === draggedArtwork.id)
 
       if (!isPlacedInGallery && !isPlacedInBedroom) {
-        // Pick random opposite corners: 0-3 (top-left/bottom-right) or 1-2 (top-right/bottom-left)
-        const oppositeCorners: [number, number] = Math.random() < 0.5 ? [0, 3] : [1, 2]
+        const washiColor = await getImageColor(draggedArtwork.image)
+        const woodTexture = Math.floor(Math.random() * 3) + 1
         setPlacedArtworks([
           ...placedArtworks,
-          { ...draggedArtwork, x, y, washiCorners: oppositeCorners }
+          { ...draggedArtwork, x, y, washiRotation: Math.random() > 0.5, washiColor, woodTexture }
         ])
       }
       setDraggedArtwork(null)
@@ -121,13 +175,13 @@ function App() {
                   className="artwork-image-wrapper"
                   draggable={!isPlaced}
                   onDragStart={() => handleDragStart(artwork)}
-                  onClick={() => {
+                  onClick={async () => {
                     if (!isPlaced) {
-                      // Pick random opposite corners: 0-3 (top-left/bottom-right) or 1-2 (top-right/bottom-left)
-                      const oppositeCorners: [number, number] = Math.random() < 0.5 ? [0, 3] : [1, 2]
+                      const washiColor = await getImageColor(artwork.image)
+                      const woodTexture = Math.floor(Math.random() * 3) + 1
                       setPlacedArtworks([
                         ...placedArtworks,
-                        { ...artwork, x: 100, y: 100, washiCorners: oppositeCorners }
+                        { ...artwork, x: 100, y: 100, washiRotation: Math.random() > 0.5, washiColor, woodTexture }
                       ])
                     }
                   }}
@@ -224,15 +278,16 @@ function App() {
           {placedArtworks.map((artwork) => (
             <div
               key={artwork.id}
-              className={`placed-artwork ${draggingId === artwork.id ? 'dragging' : ''} ${artwork.frame ? 'frame-' + artwork.frame : ''} ${Math.max(artwork.width, artwork.height) < 150 ? 'small-artwork' : ''}`}
+              className={`placed-artwork ${draggingId === artwork.id ? 'dragging' : ''} ${artwork.frame ? 'frame-' + artwork.frame : ''} ${Math.max(artwork.width, artwork.height) < 150 ? 'small-artwork' : ''} ${artwork.washiRotation ? 'washi-rotated' : ''} ${artwork.woodTexture ? 'wood-' + artwork.woodTexture : ''}`}
               onMouseDown={(e) => handleMouseDown(e, artwork)}
-              data-washi-corner-1={artwork.washiCorners?.[0]}
-              data-washi-corner-2={artwork.washiCorners?.[1]}
               style={{
                 left: artwork.x,
                 top: artwork.y,
                 width: artwork.width,
-                height: artwork.height
+                height: artwork.height,
+                ...(artwork.washiColor && {
+                  '--washi-color': artwork.washiColor
+                } as React.CSSProperties)
               }}
             >
               <img src={artwork.image} alt={artwork.title} draggable={false} />
