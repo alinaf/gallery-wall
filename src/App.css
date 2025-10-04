@@ -1,3 +1,16 @@
+* {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*:focus {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
 .app {
   display: flex;
   height: 100vh;
@@ -10,10 +23,10 @@
 .menu {
   width: 300px;
   min-width: 300px;
-  background: #f5f5f5;
+  background: #fef5e7;
   padding: 20px;
   overflow-y: auto;
-  border-left: 2px solid #ddd;
+  border-left: 2px solid #f9e4c8;
   order: 2;
   flex-shrink: 0;
 }
@@ -22,6 +35,24 @@
   margin-top: 0;
   color: #333;
   font-size: 1.5rem;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+}
+
+.menu h2::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  width: 130%;
+  height: 150%;
+  background: rgba(255, 182, 193, 0.8);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .artwork-list {
@@ -147,14 +178,14 @@
   justify-content: center;
   gap: 15px;
   padding: 10px 20px;
-  background: #f9f9f9;
-  border-bottom: 2px solid #eee;
+  background: #e8f4f8;
+  border-bottom: 2px solid #d0e8f0;
   position: relative;
 }
 
 .room-nav {
   padding: 6px 12px;
-  background: #333;
+  background: #79b0c8;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -163,17 +194,18 @@
   transition: background 0.2s;
   position: absolute;
   left: 20px;
+  font-weight: bold;
 }
 
 .room-nav:hover {
-  background: #555;
+  background: #1b4c61;
 }
 
 .room-header h1 {
   margin: 0;
-  color: #333;
+  color: #215268;
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: bold;
 }
 
 .dark-mode-toggle {
@@ -533,12 +565,16 @@ body.dark-mode {
 }
 
 body.dark-mode .menu {
-  background: #2a2a2a;
-  border-left-color: #444;
+  background: #ad9bb0;
+  border-left-color: #7b5781;
 }
 
 body.dark-mode .menu h2 {
-  color: #e0e0e0;
+  color: #ebddef;
+}
+
+body.dark-mode .menu h2::before {
+  background: #84618b;
 }
 
 body.dark-mode .artwork-item {
@@ -577,16 +613,16 @@ body.dark-mode .gallery {
 }
 
 body.dark-mode .room-header {
-  background: #2a2a2a;
-  border-bottom-color: #444;
+  background: #b9cd84;
+  border-bottom-color: #758648;
 }
 
 body.dark-mode .room-header h1 {
-  color: #e0e0e0;
+  color: #1a1a1a;
 }
 
 body.dark-mode .room-nav {
-  background: #e0e0e0;
+  background: #96af53;
   color: #1a1a1a;
 }
 
