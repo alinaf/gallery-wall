@@ -50,6 +50,10 @@ function App() {
     localStorage.setItem('bedroomArtworks', JSON.stringify(bedroomArtworks))
   }, [bedroomArtworks])
 
+  const getImagePath = (path: string) => {
+    return import.meta.env.BASE_URL + path.replace(/^\//, '')
+  }
+
   const getImageColor = (imageSrc: string): Promise<string> => {
     return new Promise((resolve) => {
       const img = new Image()
@@ -285,7 +289,7 @@ function App() {
                     }
                   }}
                 >
-                  <img src={artwork.image} alt={artwork.title} />
+                  <img src={getImagePath(artwork.image)} alt={artwork.title} />
                   <div className="artwork-info">
                     {artwork.artistLink ? (
                       <strong><a href={artwork.artistLink} target="_blank" rel="noopener noreferrer">{artwork.artist}</a></strong>
@@ -412,7 +416,7 @@ function App() {
                 } as React.CSSProperties)
               }}
             >
-              <img src={artwork.image} alt={artwork.title} draggable={false} />
+              <img src={getImagePath(artwork.image)} alt={artwork.title} draggable={false} />
               <button
                 className="remove-btn"
                 onClick={() => removeArtwork(artwork.id)}
