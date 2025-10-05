@@ -305,7 +305,7 @@ body.dark-mode .public-domain-note {
   height: 160px;
   background-image: url('/images/bench.png');
   background-size: auto 160px;
-  background-position: bottom center;
+  background-position: calc(50% + 75px) bottom;
   background-repeat: no-repeat;
   pointer-events: none;
 }
@@ -319,7 +319,7 @@ body.dark-mode .public-domain-note {
   height: 400px;
   background-image: url('/images/bedroom.png');
   background-size: auto 400px;
-  background-position: center bottom;
+  background-position: calc(50% + 75px) bottom;
   background-repeat: no-repeat;
   pointer-events: none;
 }
