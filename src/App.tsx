@@ -70,7 +70,6 @@ function App() {
   const getImageColor = (imageSrc: string): Promise<string> => {
     return new Promise((resolve) => {
       const img = new Image()
-      img.crossOrigin = 'anonymous'
       img.onload = () => {
         const canvas = document.createElement('canvas')
         const ctx = canvas.getContext('2d')
@@ -87,7 +86,7 @@ function App() {
         let imageData
         try {
           imageData = ctx.getImageData(10, 10, 1, 1).data
-        } catch (e) {
+        } catch {
           // CORS or security error - fall back to random color
           const colors = [
             [255, 182, 193], // pink
