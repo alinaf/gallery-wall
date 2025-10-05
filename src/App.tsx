@@ -8,7 +8,7 @@ interface Artwork {
   artistLink?: string
   title: string
   titleLink?: string
-  year: number
+  year: string
   image: string
   width: number
   height: number
@@ -272,6 +272,7 @@ function App() {
       <div className="app">
       <aside className="menu">
         <h2>collection</h2>
+        <p className="public-domain-note">these works are in the public domain</p>
         <div className="artwork-list">
           {artworks.map((artwork) => {
             const isPlacedInGallery = galleryArtworks.find(a => a.id === artwork.id)
@@ -323,7 +324,7 @@ function App() {
                     <span className="artwork-year">{artwork.year}</span>
                   </div>
                   {artwork.didYouKnow && (
-                    <details className="artwork-details">
+                    <details className="artwork-details" onClick={(e) => e.stopPropagation()}>
                       <summary>did you know...</summary>
                       <div className="artwork-extra-info">
                         <p>{parseLinksInText(artwork.didYouKnow)}</p>
