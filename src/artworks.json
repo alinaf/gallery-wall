@@ -9,7 +9,7 @@
     "image": "/images/afklint-2.jpg",
     "height": 53,
     "width": 37,
-    "didYouKnow": "In her will, af Klint requested that her work be kept secret for [20 years](https://www.moma.org/interactives/moma_through_time/1980/af-klint/) after her death."
+    "didYouKnow": "In her will, af Klint instructed that her work be kept secret for [20 years](https://www.moma.org/interactives/moma_through_time/1980/af-klint/) after her death, because she felt audiences of the time were not ready to appreciate or understand it."
   },
       {
     "id": "cassatt-1",
@@ -47,6 +47,18 @@
     "width": 97,
     "didYouKnow": "Tanner moved from [Pennsylvania](https://en.wikipedia.org/wiki/Pennsylvania) to [Paris](https://en.wikipedia.org/wiki/Paris) in 1891, hoping to avoid the racism he faced as an [African-American artist](https://en.wikipedia.org/wiki/List_of_African-American_visual_artists). His work was hugely successful in France, and he was knighted to the [Legion of Honor](https://en.wikipedia.org/wiki/Legion_of_Honor). Tanner lived in Paris for the rest of his life, but supported civil rights organizations like the [NAACP](https://en.wikipedia.org/wiki/NAACP) from abroad."
   },
+       {
+    "id": "tanner-2",
+    "artist": "Henry Ossawa Tanner",
+    "artistLink": "https://en.wikipedia.org/wiki/Henry_Ossawa_Tanner",
+    "title": "The Seine",
+    "titleLink": "https://www.nga.gov/artworks/52624-seine",
+    "year": "1902",
+    "image": "/images/tanner-2.jpg",
+    "height": 23,
+    "width": 33,
+    "didYouKnow": "This work was a small, [plein air](https://en.wikipedia.org/wiki/En_plein_air) [oil sketch](https://en.wikipedia.org/wiki/Oil_sketch). Tanner's landscapes often feature dreamy, pastel hues."
+  },
   {
     "id": "kahlo-1",
     "artist": "Frida Kahlo",
@@ -71,113 +83,101 @@
     "width": 13,
     "didYouKnow": "Bridges was a [pioneer](https://www.nytimes.com/2024/12/12/arts/fidelia-bridges-overlooked.html) in both watercolor painting and animal rights activism. She combined these passions by illustrating books about birds."
   },
+          {
+    "id": "mengfu-1",
+    "artist": "Zhao Mengfu",
+    "artistLink": "https://en.wikipedia.org/wiki/Zhao_Mengfu",
+    "title": "Autumn Colors on the Qiao and Hua Mountains (「鵲華秋色圖」卷)",
+    "titleLink": "https://smarthistory.org/zhao-mengfu-autumn-colors-mountains/",
+    "year": "1295",
+    "image": "/images/mengfu-1.jpg",
+    "height": 28.4,
+    "width": 93.2,
+    "didYouKnow": "The calligraphy at the top tell us that Zhao Mengfu made this painting as a [gift](https://smarthistory.org/zhao-mengfu-autumn-colors-mountains/)for his close friend Zhou Mi."
+  },
      {
     "id": "gris-1",
     "artist": "Juan Gris",
     "artistLink": "https://en.wikipedia.org/wiki/Juan_Gris",
     "title": "Ace of Clubs and Four of Diamonds",
-    "titleLink": "https://en.wikipedia.org/wiki/Still_Life_with_Checked_Tablecloth",
+    "titleLink": "https://www.nga.gov/artworks/163527-ace-clubs-and-four-diamonds",
     "year": "1915",
     "image": "/images/gris-1.jpg",
     "height": 30.5,
     "width": 16.5,
-    "didYouKnow": ""
+    "didYouKnow": "Gris was a key figure in [Cubism](https://en.wikipedia.org/wiki/Cubism), alongside [Picasso](https://en.wikipedia.org/wiki/Pablo_Picasso) and [Braque](https://en.wikipedia.org/wiki/Georges_Braque). Gris also designed ballet sets and costumes for the [Ballets Russes](https://en.wikipedia.org/wiki/Ballets_Russes)."
   },
     {
     "id": "pissaro-1",
     "artist": "Camille Pissarro",
     "artistLink": "https://en.wikipedia.org/wiki/Camille_Pissarro",
     "title": "The Artist's Garden at Eragny",
-    "titleLink": "https://en.wikipedia.org/wiki/Boulevard_Montmartre,_Spring",
+    "titleLink": "https://www.nga.gov/artworks/52198-artists-garden-eragny",
     "year": "1898",
     "image": "/images/pissarro-1.jpg",
     "height": 92,
     "width": 73,
-    "didYouKnow": ""
+    "didYouKnow": "There were [eight](https://www.britannica.com/art/the-eight-Impressionist-exhibitions) [Impressionist](https://en.wikipedia.org/wiki/Impressionism) exhibitions in Paris from 1874 to 1886. Pissarro was the [only artist](https://www.christies.com/en/stories/collecting-guide-camille-pissarro-02cf6e53a4cd4a369aec02a79831a6bf) to show work in all eight. He was a mentor to artists like [Gauguin](https://en.wikipedia.org/wiki/Paul_Gauguin) and [Cézanne](https://en.wikipedia.org/wiki/Paul_C%C3%A9zanne)."
   },
     {
     "id": "delaunay-1",
     "artist": "Robert Delaunay",
     "artistLink": "https://en.wikipedia.org/wiki/Robert_Delaunay",
     "title": "Political Drama",
-    "titleLink": "https://en.wikipedia.org/wiki/Simultaneous_Contrasts:_Sun_and_Moon",
+    "titleLink": "https://www.nga.gov/artworks/52397-political-drama",
     "year": "1914",
     "image": "/images/delaunay-1.jpg",
     "height": 76,
     "width": 101,
-    "didYouKnow": ""
+    "didYouKnow": "Robert Delaunay and his wife [Sonia Delaunay](https://en.wikipedia.org/wiki/Sonia_Delaunay) were leaders of the [Orphism](https://en.wikipedia.org/wiki/Orphism_%28art%29) movement, a colorful response to the neutral tones of [Cubism](https://en.wikipedia.org/wiki/Cubism). Orphism is also the name of an ancient Greek [religion](https://en.wikipedia.org/wiki/Orphism). Both are named after the mythical poet [Orpheus](https://en.wikipedia.org/wiki/Orpheus)."
   },
-    {
+  {
     "id": "redon-1",
     "artist": "Odilon Redon",
     "artistLink": "https://en.wikipedia.org/wiki/Odilon_Redon",
     "title": "Evocation of Roussel",
-    "titleLink": "https://en.wikipedia.org/wiki/The_Cyclops_(Redon)",
+    "titleLink": "https://www.nga.gov/artworks/46678-evocation-roussel",
     "year": "1912",
     "image": "/images/redon-1.jpg",
     "height": 73,
     "width": 54,
-    "didYouKnow": ""
+    "didYouKnow": "Redon's dreamlike, fantastical art was a precursor to [Surrealism](https://en.wikipedia.org/wiki/Surrealism) and [Dadaism](https://en.wikipedia.org/wiki/Dada)."
   },
     {
     "id": "dearth-1",
     "artist": "Henry Golden Dearth",
     "artistLink": "https://en.wikipedia.org/wiki/Henry_Golden_Dearth",
     "title": "Flecks of Foam",
-    "titleLink": "https://en.wikipedia.org/wiki/Spirit_of_the_Dead_Watching",
+    "titleLink": "https://www.nga.gov/artworks/46595-flecks-foam",
     "year": "1892",
     "image": "/images/dearth-1.jpg",
     "height": 45,
     "width": 55,
-    "didYouKnow": ""
-  },
-     {
-    "id": "tanner-2",
-    "artist": "Henry Ossawa Tanner",
-    "artistLink": "https://en.wikipedia.org/wiki/Henry_Ossawa_Tanner",
-    "title": "The Seine",
-    "titleLink": "https://en.wikipedia.org/wiki/Spirit_of_the_Dead_Watching",
-    "year": "1902",
-    "image": "/images/tanner-2.jpg",
-    "height": 23,
-    "width": 33,
-    "didYouKnow": ""
+    "didYouKnow": "Later in his career, Dearth began painting with thickly applied, vibrant jets of paint. This helped capture the movement of what became a frequent subject for him: [tide pools](https://en.wikipedia.org/wiki/Tide_pool) in [Brittany](https://en.wikipedia.org/wiki/Brittany)."
   },
     {
     "id": "renoir-1",
     "artist": "Pierre-Auguste Renoir",
     "artistLink": "https://en.wikipedia.org/wiki/Pierre-Auguste_Renoir",
     "title": "Peaches on a Plate",
-    "titleLink": "https://en.wikipedia.org/wiki/The_Bath_(Renoir)",
+    "titleLink": "https://www.nga.gov/artworks/52223-peaches-plate",
     "year": "1902",
     "image": "/images/renoir-1.jpg",
     "height": 22.2,
     "width": 35.6,
-    "didYouKnow": ""
+    "didYouKnow": "Pierre-Auguste Renoir is the father of filmmaker [Jean Renoir](https://en.wikipedia.org/wiki/Jean_Renoir), who some consider one of the [greatest directors](https://en.wikipedia.org/wiki/Jean_Renoir#Legacy) of all time."
   },
       {
     "id": "oi-1",
     "artist": "Katsushika Ōi",
     "artistLink": "https://en.wikipedia.org/wiki/Katsushika_%C5%8Ci",
     "title": "Night Scene in the Yoshiwara",
-    "titleLink": "https://en.wikipedia.org/wiki/The_Bath_(Renoir)",
+    "titleLink": "https://www.arthistoryproject.com/artists/katsushika-oi/night-scene-in-the-yoshiwara/",
     "year": "1844",
     "image": "/images/oi-1.jpg",
-    "height": 40,
-    "width": 30,
-    "didYouKnow": ""
-  },
-     {
-    "id": "meng-1",
-    "artist": "Wang Meng",
-    "artistLink": "https://en.wikipedia.org/wiki/Wang_Meng_(painter)",
-    "title": "Mount Taibai, 太白山圖",
-    "titleLink": "https://en.wikipedia.org/wiki/Mount_Taibai",
-    "year": "1271 – 1368",
-    "image": "/images/meng-1.jpg",
-    "height": 27,
-    "width": 238,
-    "didYouKnow": ""
+    "height": 30,
+    "width": 40,
+    "didYouKnow": "Ōi often collaborated with her father, [Hokusai](https://en.wikipedia.org/wiki/Hokusai), the [ukiyo-e](https://en.wikipedia.org/wiki/Ukiyo-e) printmaker known for [The Great Wave off Kanagawa](https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa). Oi's use of light and shadows, here hiding identites outside of a brothel, was unusal for [Edo](https://en.wikipedia.org/wiki/Edo_period) artwork."
   },
        {
     "id": "atkins-1",
@@ -189,30 +189,30 @@
     "image": "/images/atkins-1.jpg",
     "height": 32.4,
     "width": 22,
-    "didYouKnow": ""
+    "didYouKnow": "Atkins, an English botanist and photographer, made [cyanotypes](https://en.wikipedia.org/wiki/Cyanotype) to illustrate her book, [Photographs of British Algae: Cyanotype Impressions](https://www.metmuseum.org/art/collection/search/286656), which is considered the first ever photo book."
   },
-        {
-    "id": "mengfu-1",
-    "artist": "Zhao Mengfu",
+       {
+    "id": "meng-1",
+    "artist": "Wang Meng",
     "artistLink": "https://en.wikipedia.org/wiki/Wang_Meng_(painter)",
-    "title": "Autumn Colors on the Qiao and Hua Mountains (「鵲華秋色圖」卷)",
-    "titleLink": "https://en.wikipedia.org/wiki/Mount_Taibai",
-    "year": "1295",
-    "image": "/images/mengfu-1.jpg",
-    "height": 28.4,
-    "width": 93.2,
-    "didYouKnow": ""
+    "title": "Mount Taibai, 太白山圖",
+    "titleLink": "https://www.arthistoryproject.com/artists/wang-meng/mount-taibai/",
+    "year": "1271 – 1368",
+    "image": "/images/meng-1.jpg",
+    "height": 27,
+    "width": 238,
+    "didYouKnow": "Meng is one of the [Four Masters of the Yuan Dynasty](https://en.wikipedia.org/wiki/Four_Masters_of_the_Yuan_Dynasty), a group that promoted [literati painting](https://en.wikipedia.org/wiki/Southern_School), which combined [painting with poetry and calligraphy](https://www.berkshirepublishing.com/ecph-china/2018/01/08/literati-painting/)." 
   },
    {
     "id": "blanchard-1",
     "artist": "María Blanchard",
     "artistLink": "https://en.wikipedia.org/wiki/Mar%C3%ADa_Blanchard",
     "title": "Young Woman Combing Her Hair",
-    "titleLink": "https://en.wikipedia.org/wiki/Young_Woman_Combing_Her_Hair",
+    "titleLink": "https://www.arthistoryproject.com/artists/maria-blanchard/young-woman-combing-her-hair/",
     "year": "1925",
     "image": "/images/blanchard-1.jpg",
     "height": 90,
     "width": 65,
-    "didYouKnow": ""
-  }
+    "didYouKnow": "Although Blanchard is mainly known for her contributions to [Cubism](https://en.wikipedia.org/wiki/Cubism), this [Expressionist](https://en.wikipedia.org/wiki/Expressionism) oil painting was part of her post-Cubist look at the [human condition](https://www.museopicassomalaga.org/en/prensa/maria-blanchard-a-painter-in-spite-of-cubism) through portraits."
+   }
 ]

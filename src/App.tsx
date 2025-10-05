@@ -272,7 +272,7 @@ function App() {
       <div className="app">
       <aside className="menu">
         <h2>collection</h2>
-        <p className="public-domain-note">these works are in the public domain</p>
+        <p className="public-domain-note">these works are in the <a href="https://en.wikipedia.org/wiki/Public_domain" target="_blank" rel="noopener noreferrer">public domain</a></p>
         <div className="artwork-list">
           {artworks.map((artwork) => {
             const isPlacedInGallery = galleryArtworks.find(a => a.id === artwork.id)
