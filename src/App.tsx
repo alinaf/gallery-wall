@@ -84,7 +84,23 @@ function App() {
         ctx.drawImage(img, 0, 0)
 
         // Sample from corner
-        const imageData = ctx.getImageData(10, 10, 1, 1).data
+        let imageData
+        try {
+          imageData = ctx.getImageData(10, 10, 1, 1).data
+        } catch (e) {
+          // CORS or security error - fall back to random color
+          const colors = [
+            [255, 182, 193], // pink
+            [255, 180, 120], // peach
+            [180, 220, 255], // light blue
+            [255, 240, 120], // light yellow
+            [220, 180, 255], // lavender
+            [255, 200, 140]  // light orange
+          ]
+          const randomColor = colors[Math.floor(Math.random() * colors.length)]
+          resolve(`rgba(${randomColor[0]}, ${randomColor[1]}, ${randomColor[2]}, 0.8)`)
+          return
+        }
         const r = imageData[0]
         const g = imageData[1]
         const b = imageData[2]
