@@ -67,6 +67,19 @@ function App() {
     return import.meta.env.BASE_URL + path.replace(/^\//, '')
   }
 
+  const getRandomWashiColor = () => {
+    const colors = [
+      [255, 182, 193], // pink
+      [255, 180, 120], // peach
+      [180, 220, 255], // light blue
+      [255, 240, 120], // light yellow
+      [220, 180, 255], // lavender
+      [255, 200, 140]  // light orange
+    ]
+    const randomColor = colors[Math.floor(Math.random() * colors.length)]
+    return `rgba(${randomColor[0]}, ${randomColor[1]}, ${randomColor[2]}, 0.8)`
+  }
+
   const getImageColor = (imageSrc: string): Promise<string> => {
     return new Promise((resolve) => {
       const img = new Image()
@@ -74,7 +87,7 @@ function App() {
         const canvas = document.createElement('canvas')
         const ctx = canvas.getContext('2d')
         if (!ctx) {
-          resolve('rgba(255, 182, 193, 0.8)')
+          resolve(getRandomWashiColor())
           return
         }
 
@@ -88,16 +101,7 @@ function App() {
           imageData = ctx.getImageData(10, 10, 1, 1).data
         } catch {
           // CORS or security error - fall back to random color
-          const colors = [
-            [255, 182, 193], // pink
-            [255, 180, 120], // peach
-            [180, 220, 255], // light blue
-            [255, 240, 120], // light yellow
-            [220, 180, 255], // lavender
-            [255, 200, 140]  // light orange
-          ]
-          const randomColor = colors[Math.floor(Math.random() * colors.length)]
-          resolve(`rgba(${randomColor[0]}, ${randomColor[1]}, ${randomColor[2]}, 0.8)`)
+          resolve(getRandomWashiColor())
           return
         }
         const r = imageData[0]
@@ -114,18 +118,8 @@ function App() {
 
         // If the color is too unsaturated (gray), pick a random vibrant color
         if (saturation < 0.3) {
-          const colors = [
-            [255, 182, 193], // pink
-            [255, 180, 120], // peach
-            [180, 220, 255], // light blue
-            [255, 240, 120], // light yellow
-            [220, 180, 255], // lavender
-            [255, 200, 140]  // light orange
-          ]
-          const randomColor = colors[Math.floor(Math.random() * colors.length)]
-          newR = randomColor[0]
-          newG = randomColor[1]
-          newB = randomColor[2]
+          resolve(getRandomWashiColor())
+          return
         } else {
           // Lighten and saturate based on dominant color, but ensure minimum brightness
           if (r >= g && r >= b) {
@@ -146,7 +140,7 @@ function App() {
         resolve(`rgba(${newR}, ${newG}, ${newB}, 0.8)`)
       }
       img.onerror = () => {
-        resolve('rgba(255, 182, 193, 0.8)')
+        resolve(getRandomWashiColor())
       }
       img.src = imageSrc
     })
